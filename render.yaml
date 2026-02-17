@@ -3,8 +3,9 @@ services:
     name: incident-tracker-backend
     runtime: node
     plan: free
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && node server.js
+    root: backend
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,11 +15,9 @@ services:
     name: incident-tracker-frontend
     runtime: node
     plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npx serve -s dist -l 3000
+    root: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s dist -l 3000
     envVars:
       - key: NODE_ENV
         value: production
-    routes:
-      - path: /api
-        service: incident-tracker-backend
