@@ -2,9 +2,9 @@ services:
   - type: web
     name: incident-tracker-backend
     runtime: docker
-    dockerfilePath: ./backend/Dockerfile
-    docker:
-      context: ./backend
+    buildCommand: docker build -f backend/Dockerfile -t incident-tracker-backend ./backend
+    startCommand: node server.js
+    dockerfilePath: backend/Dockerfile
     envVars:
       - key: NODE_ENV
         value: production
@@ -12,9 +12,9 @@ services:
   - type: web
     name: incident-tracker-frontend
     runtime: docker
-    dockerfilePath: ./frontend/Dockerfile
-    docker:
-      context: ./frontend
+    buildCommand: docker build -f frontend/Dockerfile -t incident-tracker-frontend ./frontend
+    startCommand: npx serve -s dist -l 3000
+    dockerfilePath: frontend/Dockerfile
     envVars:
       - key: NODE_ENV
         value: production
