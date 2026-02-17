@@ -1,4 +1,5 @@
-const API_BASE = '/api';
+// Use environment variable if available, otherwise use relative path for local dev
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 async function request(url, options = {}) {
   const config = {
